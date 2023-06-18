@@ -1,0 +1,19 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<table>
+    <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <button type="submit">Создать</button>
+        {% for message in messages %}
+            {% if message.tags %}
+                {% if message.level ==  DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    {{ message}}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+</form>
+</table>
+
+{% endblock %}
