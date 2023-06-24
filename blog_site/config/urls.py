@@ -21,7 +21,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView
-from author.views import AuthorLogin
+from author.views import AuthorLogin, AuthorApiLogin, AuthorView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,7 +30,9 @@ urlpatterns = [
     path('feedback/', include('feedback.urls', namespace='feedback.f')),
     path('comments/', include('testimonials.urls', namespace='testimonials.comment')),
 
+    path('author_view/', AuthorView.as_view(), name='author_view'),
     # path('captcha/', include('captcha.urls')),
+    path('api/login/', AuthorApiLogin.as_view(), name='api/login'),
     path('login/', AuthorLogin.as_view(), name='login'),
     path('logout/', LogoutView.as_view(template_name='logs/logout.html'), name='logout')
 ]

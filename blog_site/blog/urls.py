@@ -8,7 +8,7 @@ app_name = 'blog'
 
 urlpatterns = [
     path('', AllPAges.as_view(), name='all_pages'),
-    path('blogdetail-<int:pk>/', (condition(last_modified_func=latest_entry))(BlogDetail.as_view()),
+    path('blogdetail-<int:pk>/', BlogDetail.as_view(),
          name='detail_page'),
     path('create/', CreateBlog.as_view(), name='create_blog'),
     path('blog/delete/<int:pk>/', BlogDelete.as_view(), name='delete_blog'),
