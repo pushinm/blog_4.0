@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import Group
 
 
 # Create your models here.
@@ -24,7 +25,10 @@ class Author(AbstractUser):
 
 
 class Profile(models.Model):
-    author = models.OneToOneField(Author, on_delete=models.CASCADE,  related_name='author_profile')
+    author = models.OneToOneField(Author, on_delete=models.CASCADE, related_name='author_profile')
 
     def __str__(self) -> str:
         return self.author.username
+
+
+
