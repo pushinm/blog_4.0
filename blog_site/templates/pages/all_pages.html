@@ -1,13 +1,23 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
- <div class="container">
+<div class="container">
+    <div class="row mydiv"></div>
+</div>
+
+<div class="pagination justify-content-center">
+    <ul class="pagination"></ul>
+</div>
+<!-- <div class="mydiv">
+
+</div> -->
+ <!-- <div class="container">
         <div class="row">
             {% for blog in blogs %}
                 <div class="col-md-4">
                     <div class="card mb-4">
     <img src="{{ blog.photo.url }}" class="card-img-top" alt="{{ blog.title }}">
-    <div class="card-body text-center"> <!-- Добавлен класс "text-center" для центрирования содержимого -->
+    <div class="card-body text-center"> 
         <h5 class="card-title">
             <a href="{% url 'blog:detail_page' blog.pk %}" style="text-decoration: none;">{{ blog.title }}</a>
         </h5>
@@ -17,8 +27,8 @@
                 </div>
             {% endfor %}
         </div>
-    </div>
-
+    </div> -->
+<!-- 
     <div class="pagination justify-content-center">
         <ul class="pagination">
             {% if page_obj.has_previous %}
@@ -43,5 +53,6 @@
                 </li>
             {% endif %}
         </ul>
-    </div>
+    </div> -->
 {% endblock %}
+

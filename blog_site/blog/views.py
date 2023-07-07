@@ -22,10 +22,19 @@ from .CustomMixins import BlogMixin
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.cache import cache
+from rest_framework.generics import ListAPIView
+from .serializers import BlogsListSerializer
+from rest_framework.pagination import PageNumberPagination
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
+
+
+class BlogsPagination(PageNumberPagination):
+    page_size = 2
 
 
 def latest_entry(request, pk):
@@ -61,16 +70,14 @@ class CreateBlog(CreateView, SuccessMessageMixin):
         return super().form_valid(form)
 
 
-class AllPAges(ListView):
-    model = Blog
+class AllBlogsTemplate(TemplateView):
     template_name = 'pages/all_pages.html'
-    context_object_name = 'blogs'
-    paginate_by = 4
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['authors'] = Author.objects.all()
-        return context
+
+class AllBlogsAPi(ListAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogsListSerializer
+    pagination_class = BlogsPagination
 
 
 @method_decorator(cache_page(timeout=120, key_prefix='detail_blog'), name='get')
